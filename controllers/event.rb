@@ -17,4 +17,20 @@ class Event
            begin_hour: Time.now,
            end_hour: Time.now).freeze
 
+  def clean_time(time)
+    Time.new(0, 1, 1, time.hour, time.min)
+  end
+
+  def clean_begin
+    clean_time(@data[:begin_hour])
+  end
+
+  def clean_end
+    clean_time(@data[:end_hour])
+  end
+
+  def collide?(event)
+    range = (clean_begin..clean_end)
+    range.cover?(event.clean_begin) || range.cover?(event.clean_end)
+  end
 end
