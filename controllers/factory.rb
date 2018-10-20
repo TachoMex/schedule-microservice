@@ -45,4 +45,8 @@ module FactoryInstanceMethods
   def id
     @data[self.class.resource(:id_field)]
   end
+
+  def to_json(options)
+    @data.to_json(options)
+  end
 end
